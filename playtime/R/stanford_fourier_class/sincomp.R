@@ -2,6 +2,29 @@
 ## Problem number four in the first problem set.
 ## http://see.stanford.edu/materials/lsoftaee261/PS-1-2007.pdf
 
+gcd <- function(a, b)
+{
+  a=as.integer(a)
+  b=as.integer(b)
+  stopifnot(!(a==0 && b==0))
+  if ( a == 0 )
+    return(b)
+
+  if ( b == 0 )
+    return(a)
+
+  return(abs(gcd(b, a-b*floor(a/b))))
+}
+
+
+lcm <- function(a, b)
+{
+  a=as.integer(a)
+  b=as.integer(b)
+  return(abs(a*b)/gcd(a,b))
+}
+
+
 sincomp <- function(t, p1, p2)
 {
   #x11()
@@ -13,6 +36,12 @@ sincomp <- function(t, p1, p2)
   plot(t,y1, xaxp=ticks)
   plot(t,y2, xaxp=ticks)
   plot(t,y1+y2, xaxp=ticks) 
+}
+
+sincomp2 <- function(t, m, r, n, s)
+{
+  sincomp(t, m/r, n/s)
+  print(lcm(r,s)/gcd(m,r))
 }
 
 # problem 4d
