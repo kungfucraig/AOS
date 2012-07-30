@@ -1,7 +1,6 @@
-
-# An R-Program to explore triangle function composition from
-# problem number two in the following problem set.
-# http://see.stanford.edu/materials/lsoftaee261/PS-1-2007.pdf
+## An R-Program to explore triangle function composition from
+## problem number two in the first problem set.
+## http://see.stanford.edu/materials/lsoftaee261/PS-1-2007.pdf
 
 tri <- function(a, b, c, t)
 {
@@ -37,16 +36,19 @@ tri3 <- function(x1, x2, x3, y2, t)
   return(y)
 }
 
-# From fourier homework #1, problem 2
-t = seq(-10,10,by=.01)
+trimain <- function()
+{
+  ## From fourier homework #1, problem 2
+  t = seq(-10,10,by=.01)
 
-#See: http://sphaerula.com/legacy/R/multiplePlotFigure.html
-par(mfrow=c(2,2))
-plot(t,tri2(2,1,0, 2,1,2,t), main="Problem 2a")
-plot(t,tri2(2,2,0, 2,2,3,t), main="Problem 2b")
-plot(t,tri2(2,6,3, 2,3,5,t), main="Problem 2c")
-
-# Problem 2c:
-#screen(3) 
-#par(mfrow=c(3,1))
-plot(t,tri3(1,3,7,6,t), main="Problem 2d")
+  ##See: http://sphaerula.com/legacy/R/multiplePlotFigure.html
+  par(mfrow=c(2,2))
+  plot(t,tri2(2,1,0, 2,1,2,t), main="Problem 2a")
+  plot(t,tri2(2,2,0, 2,2,3,t), main="Problem 2b")
+  plot(t,tri2(2,6,3, 2,3,5,t), main="Problem 2c")
+  
+  ## Problem 2c:
+  ##screen(3) 
+  ##par(mfrow=c(3,1))
+  plot(t,tri3(1,3,7,6,t), main="Problem 2d")
+}
