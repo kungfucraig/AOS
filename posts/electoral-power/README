@@ -1,0 +1,37 @@
+All of this culminated a small blog post:
+
+http://artofsoftware.org/2012/08/15/affect-of-electoral-college-on-state-electoral-power/
+
+******
+Files:
+******
+
+All data was collected in data.xlsx, of which data.csv is a dump sans forumlae of course.
+
+The directory ecpower contains some code for generating plots of the data. There is
+an R script for generating jpegs.
+
+The directory elections is the raw election data from http://psephos.adam-carr.net
+That directory has a README of its own. We used this to generate columns in the
+spreadsheet telling which party won each state in presidential elections back to
+1980.
+
+The directory shapefiles has map data for the US and a dbf file with the per
+capita voting power in it. There is some Python code for generating the dbf file.
+
+I have a little utility program shp2svg, which was used to generate an svg file 
+with the voting power data mapped onto it from the shapefile.
+
+The command line used was:
+
+shp2svg tl_2010_us_state10.shp -d 1 -o pow.svg -x 'translate(820,380),scale(6,-6)' -i 0 -lx 450 -ly 50 -lh 13 -lw 35 -lts 1 -ltx 5 -lty -3 -t Electoral Voting Power Per Capita -tx 55 -ty 25 -s map.css
+
+******
+Tools used:
+******
+  emacs
+  csvcut
+  R
+  Excel
+  Python
+

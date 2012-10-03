@@ -1,0 +1,26 @@
+
+polygon.shape { }
+
+polygon#AK
+{
+    stroke: red;
+    fill: red;
+}
+
+text#title {
+    stroke: black;
+    stroke-width:1px;
+    fill: black;
+    font-size: 30px;
+}
+
+text.legend {
+    font-size: 8pt;
+    fill: black;
+    font-weight: bold;
+}
+
+rect.legend {
+    stroke: white;
+    stroke-width:0.05;
+}

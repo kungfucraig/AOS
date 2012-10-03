@@ -31,11 +31,6 @@ void find(Container& cont, unsigned int numvalues, Generator gen)
    }
 }
 
-// void performanceHelper(BloomFilter<int, MultiHash>& bf,
-//                        std::set<int>& theset,
-//                        {
-// }
-
 void performanceTest(unsigned int numvalues, unsigned int numbits, MultiHash mh)
 {
 

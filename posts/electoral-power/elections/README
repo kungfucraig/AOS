@@ -1,0 +1,23 @@
+The programs are ad hoc utilities to reformat the data files so
+that they can be consumed by csvcut. 
+
+For data see: http://psephos.adam-carr.net/countries/u/usa/pres/1984.txt
+
+I sorted so that I could easily paste to the Excel sheet.
+
+Commands to get what party won the race for the given election year. 
+./strip.py 1980-raw.txt | sort | csvcut -t -c 1,7,10 | ./combine.py
+./strip.py 1984-raw.txt    | sort | csvcut -t -c 1,4,7 | ./combine.py
+./strip.py 1988-raw.txt    | sort | csvcut -t -c 1,7,4 | ./combine.py
+./strip.py 1992-raw.txt    | sort | csvcut -t -c 1,7,4 | ./combine.py
+./strip.py 1996-raw.txt    | sort | csvcut -t -c 1,4,7 | ./combine.py
+
+# Cut away the top temporarily so that "strip" would not choke.
+./strip.py 2000-raw.txt    | sort | csvcut -t -c 1,7,4  | ./combine.py 
+
+# Cut away the top plus add a dotted line, as strip was expecting two.
+./strip.py 2008-raw.txt    | sort | csvcut -t -c 1,7,4  | ./combine.py 
+
+# 2004 is just weird, and I did it manually.
+
+

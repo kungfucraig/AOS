@@ -1,0 +1,1 @@
+~/Campaign/research/shapefiles/states-modified/shp2svg tl_2010_us_state10.shp -d 1 -o /craig.wright/junk/pow.svg -x 'translate(820,380),scale(6,-6)' -i 0 -lx 450 -ly 50 -lh 13 -lw 35 -lts 1 -ltx 5 -lty -3 -t Electoral Voting Power Per Capita -tx 55 -ty 25 -s map.css
