@@ -18,14 +18,21 @@ estimate <- function(x,data)
 
 slices=c(0, 1, 2, 4, 32, 64, 128, 256, 512, 1024)
 x=seq(0,1,by=0.001)
-par(mfrow=c(5,2))
 
-w <- mapply(
-            function(s) { 
-              yhat=estimate(x, data[1:s])
-              plot(x,yhat,main=sprintf("No. Points = %d",s))
+showPDF <- function(x, slices, data) {
+  par(mfrow=c(5,2))
+  
+  w <- mapply(
+              function(s) { 
+                yhat=estimate(x, data[1:s])
+                plot(x,yhat,main=sprintf("No. Points = %d",s))
               }, 
-            slices)
+              slices)
+}
+#showPDF(x, slices, data)
 
+x11()
+yhat=-length(data)/((1-x)*x)
+plot(x,yhat)
 
 
