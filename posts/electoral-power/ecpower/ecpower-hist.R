@@ -4,6 +4,11 @@ raw = read.table("ecpower-rwins.csv", sep = ",")
 x <- data.frame(power=raw$V3, rwinstweaked=raw$V4, rwins=raw$V5)
 x$lab <- raw$V2
 
+raw2 = read.table("ecpower-by-power.csv", sep = ",")
+y <- data.frame(power=raw2$V1, lab=raw2$V2)
+#y$lab <- raw2$V2
+
+
 rwinsCounts <- as.data.frame(table(x$rwins))
 
 #hist(x$power,
@@ -34,6 +39,10 @@ dev.off()
 #dev.copy(jpeg,'ecpower-histogram.jpeg')
 #dev.off()
 qplot(x$power)
+
+jpeg(filename='electoral-power-rank.jpeg', width=600, height=800, units="px")
+ggplot(data=y, aes(power, 1:50, label=lab)) + geom_text(vjust=0, size=3) + scale_x_continuous("Voting Power Per Capita") + scale_y_discrete("Rank") + opts(title="Electoral Power Ranked by State")
+dev.off()
 
 
 
