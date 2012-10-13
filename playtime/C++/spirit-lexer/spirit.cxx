@@ -32,8 +32,8 @@
 //
 // The grammar we want to recognize is:
 //    identifier := [a-z]+
-//    separator = :
-//    path= (identifier separator path) | identifier
+//    separator  := ':'
+//    path       := (identifier separator path) | identifier
 //
 // From the boost spirit perspective this example shows
 // a few things I found hard to come by when building my
@@ -43,7 +43,6 @@
 //    2. How to bind an action on an instance of an object
 //       that is taken as input to the parser.
 //    3. Use of std::wstring.
-//    4. Use of the lexer iterator.
 //
 // Some of what was mentioned above was provided as answers to
 // a stackoverflow question I asked on the 12th of October, 2012.
