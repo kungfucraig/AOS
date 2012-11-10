@@ -1,0 +1,4 @@
+
+
+all:
+	pdflatex probability.tex

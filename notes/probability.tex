@@ -1,0 +1,398 @@
+\documentclass{article}
+%%\usepackage{fullpage}
+\usepackage[T1]{fontenc}
+%\usepackage{avant}
+%\usepackage{arev}
+%\usepackage{lmodern}
+
+%%\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%\pagenumbering{gobble}
+\usepackage{parskip}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\textheight=11in
+%%\pagestyle{empty}
+%\raggedbottom
+\raggedright
+
+\begin{document}
+
+\title{Notes on Probability and Statistics}
+\author{Craig Wright (kungfucraig@gmail.com)}
+\date{\today}
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\part{Basics}
+\section{Mass \& Density Functions}
+
+Probability mass function
+\begin{equation*}
+\sum_{x \in X} P(X=x) = 1 
+\end{equation*}
+
+Probability density function
+\begin{equation*}
+\int_{-\infty}^{\infty}  f(x)dx = 1 
+\end{equation*}
+
+\begin{equation*}
+P(a \leq X \leq b) = \int_{a}^{b}  f(x)dx 
+\end{equation*}
+
+Cumulative density function
+\begin{equation*}
+F(x) = P(X \leq x) = \int_{-\infty}^{x}  f(u)du
+\end{equation*}
+
+
+\section{Expected Value/Mean}
+
+Discrete
+\begin{equation*}
+  E[X]=\sum_{i\in X}xP(X=x)
+\end{equation*}
+
+Continuous
+\begin{equation*}
+  E[X]=\int_{-\infty}^{\infty} x f(x) dx
+\end{equation*}
+
+\textbf{Linearity of Expectations}
+
+Discrete
+\begin{align*}
+  E[aX+b] &= \sum_{x\in X} (ax+b) P(X=x) \\
+  &= \sum_{x\in X} ax P(X=x) +  \sum_{x \in X} b P(X=x) \\
+  &= a \sum_{x\in X} x P(X=x) +  b \sum_{x \in X} P(X=x) \\
+  &= a E[X] + b \\
+\end{align*}
+
+Continuous
+\begin{align*}
+  E[aX+b] &= \int_{-\infty}^{\infty} ax+b dx \\
+  &= \int_{-\infty}^{\infty} axdx + \int_{-\infty}^{\infty} bdx \\
+  &= a\int_{-\infty}^{\infty} xdx + b \\
+  & = aE[X]+b
+\end{align*}
+
+
+\textbf{Sums of Random Variables}
+
+Discrete
+\begin{align*}
+  E[X+Y] &= \sum_{x\in X} \sum_{y\in Y} (x+y) P(X=x,Y=y) \\
+  &= \sum_{x\in X} \sum_{y\in Y} xP(X=x,Y=y) +yP(X=x,Y=y)\\
+  &= \sum_{x\in X} \sum_{y\in Y} xP(X=x,Y=y) +\sum_{y\in Y} \sum_{x\in X} yP(X=x,Y=y)\\
+  &= \sum_{x\in X} x \sum_{y\in Y} P(X=x,Y=y) +\sum_{y\in Y} y \sum_{x\in X} P(X=x,Y=y)\\
+  &= \sum_{x\in X} x P(X=x) +\sum_{y\in Y} y P(Y=y)\\
+  & = E[X]+E[Y]
+\end{align*}
+
+Continuous
+\begin{align*}
+  E[X+Y] &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x+y) dydx \\
+  &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x dydx + \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x dydx \\
+  &= \int_{-\infty}^{\infty} x dx +\int_{-\infty}^{\infty} y) dy \\
+  & = E[X]+E[Y]
+\end{align*}
+
+\textbf{Product of \textit{Independent} Random Variables}
+
+Discrete
+\begin{align*}
+  E[XY] &= \sum_{x\in X}\sum_{y\in Y} xyP(X=x,Y=y)\\
+  &= \sum_{x\in X}\sum_{y\in Y} xyP(X=x)P(Y=y)\\
+  &= \sum_{x\in X}xP(X)\sum_{y\in Y} yP(Y=y)\\
+  &= E[X]E[Y]
+\end{align*}
+
+\section{Median}
+
+Continuous case:
+\begin{equation*}
+  \arg_x F(x) = \frac{1}{2}
+\end{equation*}
+
+\section{Mode}
+
+Really only makes sense for unimodal distribution.
+
+Continuous case:
+\begin{equation*}
+  \arg_x \frac{df(x)}{dx} = 0
+\end{equation*}
+
+\section{Variance}
+\begin{align*}
+  Var(X) &= E[(X-E[X])^2] \\
+  &= E[X^2-2XE[X]+E[X]^2]\\
+  &= E[X^2] - E[2XE[X]] + E[E[X]^2]\\
+  &= E[X^2] - 2E[X]E[X] + E[X]^2\\
+  &= E[X^2] - 2E[X]^2 + E[X]^2\\
+  &= E[X^2] - E[X]^2
+\end{align*}
+
+Multiplication by scalar
+\begin{align*}
+Var(aX) &= E[(aX)^2] - E[aX]^2\\
+&= E[a^2X^2] - (aE[X])^2\\
+&= a^2E[X^2] - a^2E[X]^2\\
+&= a^2(E[X^2] - E[X]^2)\\
+&= a^2Var(X)\\
+\end{align*}
+
+Addition of a scalar
+\begin{align*}
+Var(X+b) &= E[(X+b)^2] - E[X+b]^2\\
+&= E[X^2+2bX+b^2] - (E[X]+E[b])^2\\
+&= E[X^2]+E[2bX]+E[b^2] - (E[X]^2+2E[b]E[X]+E[b]^2)\\
+&= E[X^2]+2bE[X]+b^2 - E[X]^2-2bE[X]-b^2)\\
+&= Var(X)
+\end{align*}
+
+Covariance
+\begin{align*}
+  Cov(X,Y)&=E[(X-E[X])(Y-E[Y])]\\
+  &=E[XY-E[X]Y-XE[Y]+E[X]E[Y]]\\
+  &=E[XY]-E[X]E[Y]-E[X]E[Y]+E[X]E[Y]]\\
+  &=E[XY]-E[X]E[Y]\\
+\end{align*}
+
+Sum of two random variables
+\begin{align*}
+Var(X+Y) &= E[(X+Y)^2] - E[X+Y]^2\\
+&= E[X^2+2XY+Y^2] - (E[X]+E[Y])^2\\
+&= E[X^2]+E[2XY]+E[Y^2] - (E[X]^2+2E[Y]E[X]+E[Y]^2)\\
+&= E[X^2]-E[X]^2 + E[Y^2]-E[Y]^2 + 2(E[XY] - E[X]E[Y])\\
+&= Var(X) + Var(Y) + 2Cov(X,Y)
+\end{align*}
+
+Sum of two independent random variables
+\begin{align*}
+Var(X+Y) &= Var(X) + Var(Y) + 2Cov(X,Y)\\
+&= Var(X) + Var(Y) + 2(E[XY] - E[X]E[Y])\\
+&= Var(X) + Var(Y) + 2(E[X]E[Y] - E[X]E[Y])\\
+&= Var(X) + Var(Y) 
+\end{align*}
+
+\section{Correlation}
+\begin{equation*}
+  \rho=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}
+\end{equation*}
+
+\section{Moments and The Moment Generating Function}
+
+Definition of a moment $\mu_n$ about $a$:
+\begin{equation*}
+\mu_n(a) = \int (x-a)^nf(x)dx
+\end{equation*}
+or
+\begin{equation*}
+\mu_n(a) = \int (x-a)^ndF(x)
+\end{equation*}
+or
+\begin{equation*}
+\mu_n(a) = E[(x-a)^n]
+\end{equation*}
+
+If $a=0$ the above functions degenerate into what is called the ``raw-moment'' (i.e. $E[X^n]$)
+Let $\mu'_n=\mu_n(0)$ and $\mu_n=\mu_n(E[X])$, and $\mu=E[X]=\mu'_1$
+
+
+Consider the Taylor Series of $e^{tx}$
+\begin{equation*}
+  e^{tx}=\sum_{n=0}^{\infty} \frac{t^nx^n}{n!} = 1+tx+\frac{t^2x^2}{2!}+\frac{t^3x^3}{3!}+...
+\end{equation*}
+
+Moment Generating Function
+\begin{align*}
+  M(t)&=E[e^{tX}] \\
+  &= \int e^{tx}f(x)dx \\
+  &= \int (1+tx+\frac{t^2x^2}{2!}+\frac{t^3x^3}{3!}+...)f(x)dx \\
+  &= \int (f(x) +txf(x)+\frac{t^2x^2f(x)}{2!}+\frac{t^3x^3f(x)}{3!}+...)dx \\
+  &= 1 +t\mu'_1+\frac{t^2\mu'_2}{2!}+\frac{t^3\mu'_1}{3!}+...
+\end{align*}
+
+Thus differentiating $M(t)$ k-times gives us the kth raw-moment.
+\begin{align*}
+  M(0)&=0\\
+  M'(0)&=\mu'_1=E[X]\\
+  M''(0)&=\mu'_2=E[X^2]\\
+  ...
+\end{align*}
+
+Consider the moment generating function of a sum of two independent random variables
+\begin{align*}
+  M_{X+Y}(t)&=E[e^{t(X+Y)}]\\
+  &=E[e^{(tX+tY)}]\\
+  &=E[e^{tX}e^{tY}]\\
+  &=E[e^{tX}]E[e^{tY}]\\
+  &=M_X(t)M_Y(t)
+\end{align*}
+
+Consider a linear transformation of a random variable 
+\begin{align*}
+  M_{aX+b}(t)&=E[e^{t(aX+b)}]\\
+  &=E[e^{taX}e^{tb}]\\
+  &=e^{tb}E[e^{taX}]\\
+  &=e^{tb}M(at)
+\end{align*}
+
+%Thus to get the moment around the mean, also called the ``central moment'' evaluate
+%\begin{align*}
+%  M_{X+\mu'_1}(t)=e^{\mu'_1 t}M_X(t)
+%\end{align*}
+The kth standardized momoment is defined as $\displaystyle \frac{\mu_k}{\sigma^k}$.
+This is the kth moment around the mean divided by the standard deviation to the
+kth power. Thus the 2nd standardized moment is $\displaystyle \frac{Var(X)}{Var(X)}=1$.
+
+
+% sum of random variables and series expansion of e^{tX} 
+% derivatives give E[X^{whatever}]
+
+%central moment? (moment about the mean)
+%standardized moment
+%moment? raw moment,
+%http://en.wikipedia.org/wiki/Moment_(mathematics)
+
+\section{Skewness}
+Skewness is also called the third standardized moment.
+\begin{align*}
+  Skew(X)&=\gamma_1 = \frac{E[(X-E[X])^3]}{\sigma^3} = \frac{\mu_3}{\sigma^3}\\
+\end{align*}
+
+Breaking out the numerator
+\begin{align*}
+  E[(X-E[X])^3] &= E[(X^3   + 3XE[X]^2  - 3X^2E[X] - E[X]^3)]\\
+  &= E[X^3] + 3E[X]E[X]^2 - 3E[X^2]E[X] - E[X]^3\\
+  &= E[X^3] - 3E[X](E[X^2]-E[X]^2) - E[X]^3\\
+  &= \mu'_3 - 3\mu \mu_2 - \mu^3
+\end{align*}
+  %&= E[X^3] - 3\mu'_1\mu_2^2 - \mu'_2^3
+  %&= \mu'_3 - 3\mu'_1\mu_2^2 - \mu'_2^3
+
+Thus
+\begin{align*}
+  Skew(X)&=\frac{\mu'_3 - 3\mu \mu_2 - \mu^3}{\sigma^3}
+\end{align*}
+
+
+Positive skewness means that a distribution is right-tailed or right-skewed, while
+negative skewness means that a distribution  is left-tailed or left-skewed.
+
+\section{Kurtosis}
+
+\part{Distributions}
+\section{Binomial Distribution}
+
+The binomial distribution gives the probability of $k$
+successes in a series of $n$ indepdent Bernoulli trials, where each 
+trial has a probability $p$ of success.
+
+\begin{equation*}
+  f(k;n,p)={n \choose k}p^k(1-p)^{n-k}
+\end{equation*}
+
+Let $Z_k$ be a Bernoulli random variable with parameter
+$p$ and
+$X$ be a binomial random variable with parameter $n$ and $p$.
+Then the expected value of $X$ is given by the
+following.
+\begin{align*}
+  E[X]&=E[\sum_{k=0}^n Z_k]\\
+  &=\sum_{k=0}^nE[Z_k]\\
+  &=\sum_{k=0}^np\\
+  &=np
+\end{align*}
+
+We use the binomial formula to derive the moment generating function.
+\begin{align*}
+  M(t) &= E[e^{tX}]\\
+  &=\sum_{k=0}^n e^{tk} f(k)\\
+  &=\sum_{k=0}^n e^{tk} {n \choose k} p^k (1-p)^{n-k}\\
+  &=\sum_{k=0}^n {n \choose k} (pe^t)^k (1-p)^{n-k}\\
+  &=(1-p+pe^t)^n\\
+\end{align*}
+
+Thus the expectation can also be derived by the mgf.
+\begin{align*}
+  M'(t)=n(1-p+pe^t)^{n-1}pe^t
+\end{align*}
+
+
+
+%http://en.wikipedia.org/wiki/Binomial_coefficient#Combinatorics_and_statistics
+Moment generating function
+E[X]
+Variance
+Skewness
+Kurtosis
+
+How do we get to Poisson?
+
+\section{Coin Fairness Estimate}
+
+We have a coin, the fairness of which is in question. We have observed $N=H+T$ flips where $N$ is a the total number of flips and $H$ and $T$ are random variables denoting the number of heads and tails respectively. 
+
+
+Let $X$ be a random variable on the interval $[0,1]$ that denotes the probability of a flip being heads with a posterior pdf $f(x)$. Let $g$ be the prior pdf for $X$, which is taken to be the uniform distribution on the interval $[0,1]$. Thus $g(x)=1$ for all $x\in[0,1]$. Finally, let $P(H,T|x)$ equal the binomial distribution.
+
+Then we have the following estimate for $f(x)$.
+\begin{align*}
+f(x) &= \displaystyle f(x|H=h,T=t) \\[1em]
+     &= \displaystyle \frac{\displaystyle P(H=h,T=t|x)g(x)}{\displaystyle \int_0^1 P(H,T|s)g(s)ds} \\[1em]
+     &= \displaystyle \frac{\displaystyle {h+t \choose h} x^h (1-x)^t g(x)}{\displaystyle \int_0^1 {h+t \choose h} s^h (1-s)^tg(s)ds} \\[1em] 
+     &= \displaystyle \frac{\displaystyle x^h (1-x)^t}{\displaystyle \int_0^1 s^h (1-s)^tds} \\[1em] 
+     &= \displaystyle \frac{\displaystyle x^h (1-x)^t}{\displaystyle B(h+1,t+1)} \\[1em] 
+     &= \text{Beta}(h+1,t+1)
+\end{align*}
+
+Here $B$ is the beta function and $\text{Beta}$ is the beta distribution. So our posterior pdf is a beta distribution.
+
+Next let's determine the best estimate for $P(X=heads)$. This will be the maximum value of the pdf. We
+can get this value by maximizing the numerator alone as the denominator has no terms that contain
+$x$. Taking $t=n-h$, the log of the numerator is $h\log(x) + (n-h)\log(1-x)$. It's deriviative 
+is $\frac{h}{x} + \frac{n-h}{1-x}$. Setting this equal to zero we have the following.
+
+
+\begin{align*}
+  \displaystyle \frac{h}{x} - \frac{n-h}{1-x} &= 0 \\[1em]
+  \displaystyle (1-x)h &= x(n-h) \\[1em]
+  \displaystyle h &= xn  \\[1em]
+  \displaystyle x &= \frac{h}{n}  
+\end{align*}
+
+The result is the same as $E(\text{Beta}(h,t))$, however the maximum value of the
+pdf will not always conincide with the expected value of the distribution.
+For example, consider the Cauchy distribution.
+
+% This is what we just did... Kinda.
+% http://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation
+
+% How does MLE stack up?
+% From wikipedia: Observe that the MAP estimate of coincides with the ML estimate when the prior  is uniform (that is, a constant function).
+
+%% Do references.
+%% Where does ``S'' book get its derivation of std. deviation from? Taylor series stuff... 
+
+
+% Can we do Bayesian derivation for Multinomial?
+
+
+\section{Birthday Problem}
+
+\section{Markov's and Chebychev's Inequality}
+
+Discrete Case:
+%frequency distribution 
+
+Continuous Case:
+
+\end{document}
