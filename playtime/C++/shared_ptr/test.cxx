@@ -18,6 +18,7 @@ int main()
          std::cerr << f1 << ", " << f2 << "\n";
       }
       const Foo* fPtr = f2.get();
+      std::cerr << f2.get() << "\n";
       f2.reset();
       std::cerr << "Going out of scope.\n";
    }
