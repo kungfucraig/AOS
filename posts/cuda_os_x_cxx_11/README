@@ -1,4 +1,4 @@
-The code in this directory is written about at:
+The code in this directory is written about at: http://wp.me/p1Pqiu-9X
 
 The basic idea is that CUDA under OS X is only supported with g++, and in fact clang++ will
 choke due to a number of reasons, one of which is support for certain atomic instructions, the
