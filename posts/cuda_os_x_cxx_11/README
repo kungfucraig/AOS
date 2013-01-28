@@ -1,0 +1,29 @@
+The code in this directory is written about at:
+
+The basic idea is that CUDA under OS X is only supported with g++, and in fact clang++ will
+choke due to a number of reasons, one of which is support for certain atomic instructions, the
+names of which escape me now.
+
+On the other hand the g++ that ships with OS X does not support C++ 11.
+
+So what is one to do if one wants to use C++ 11, OS X, and CUDA simultaneously? This is
+one possible solution.
+
+That said, the robustness of it is IMO highly suspect. Hopefully NVIDIA will suport
+clang++ or Apple will support a version of g++ with C++ 11 support soon. Until then 
+at least I can move forward.
+
+Files:
+   README - This file.
+   Makefile - Build instructions for nvcc, g++, and clang++ on OS X Mountain Lion
+   square.cu - A CUDA code for squaring an array of floats. This is compiled with g++.
+   main.cxx  - A main line which allocates host and device memory and runs the CUDA code.
+               This file is compiled with clang++.
+
+All linking is done with the clang++ tool chain.
+
+
+Notes:
+  * Use of std::cout under g++ causes link errors. This is due to some vagaries with
+  static initializaton, probably related to how iostream is implemented. This only
+  seems to happen when c++-11 support is on in clang, however.
